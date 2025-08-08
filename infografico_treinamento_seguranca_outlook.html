@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infográfico: Guia Essencial de Segurança de E-mail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F4F8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px;
+            }
+        }
+        .flowchart-step {
+            position: relative;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-width: 2px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .flowchart-step::after {
+            content: '▼';
+            position: absolute;
+            bottom: -1.75rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            color: #0A9396;
+        }
+        .flowchart-step:last-child::after {
+            content: '';
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+            padding-left: 2.5rem;
+            border-left: 3px solid #0A9396;
+        }
+        .timeline-item::before {
+            content: attr(data-step);
+            position: absolute;
+            left: -1.25rem;
+            top: -0.25rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background-color: #0A9396;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#005F73] mb-2">Guia Essencial de Segurança de E-mail</h1>
+            <p class="text-lg text-[#0A9396]">Proteja-se contra as ameaças cibernéticas mais comuns.</p>
+        </header>
+
+        <section id="intro" class="mb-16">
+            <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+                <p class="text-2xl font-semibold text-[#005F73] mb-4">O e-mail é a principal porta de entrada para ataques cibernéticos.</p>
+                <div class="text-8xl font-bold text-[#EE9B00]">91%</div>
+                <p class="text-xl text-gray-600 mt-2">dos ataques cibernéticos bem-sucedidos começam com um e-mail de phishing.</p>
+                <p class="mt-4 text-gray-700">Sua atenção é a primeira e mais importante linha de defesa. Este guia mostra como identificar e reagir a e-mails maliciosos que chegam à sua caixa de entrada todos os dias.</p>
+            </div>
+        </section>
+
+        <section id="threats" class="mb-16">
+            <h2 class="text-3xl font-bold text-center text-[#005F73] mb-8">Conheça Seus Inimigos: Tipos de Ataques</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="chart-container">
+                        <canvas id="threatsChart"></canvas>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-semibold text-[#005F73]">Níveis de Ameaça</h3>
+                    <p class="text-gray-700">Nem todos os ataques são iguais. O gráfico ao lado compara a prevalência e o perigo dos ataques mais comuns. Enquanto o phishing em massa é mais frequente, o spear phishing é muito mais direcionado e perigoso.</p>
+                    <ul class="list-none space-y-3">
+                        <li class="flex items-start"><span class="font-bold text-[#0A9396] mr-2">●</span><div><strong class="text-[#005F73]">Phishing:</strong> E-mails em massa, genéricos, tentando enganar qualquer um.</div></li>
+                        <li class="flex items-start"><span class="font-bold text-[#EE9B00] mr-2">●</span><div><strong class="text-[#005F73]">Malware:</strong> E-mails com anexos perigosos que infectam seu computador.</div></li>
+                        <li class="flex items-start"><span class="font-bold text-[#AE2012] mr-2">●</span><div><strong class="text-[#005F73]">Spear Phishing:</strong> E-mails personalizados, que usam informações sobre você para parecerem legítimos. São os mais difíceis de detectar.</div></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="identification" class="mb-16">
+            <h2 class="text-3xl font-bold text-center text-[#005F73] mb-8">Checklist do Detetive: Como Identificar um E-mail Suspeito</h2>
+            <div class="max-w-2xl mx-auto">
+                <div class="flowchart-step border-[#0A9396] bg-white">
+                    <h3 class="text-xl font-semibold text-[#005F73]">1. Verifique o Remetente</h3>
+                    <p class="text-gray-600">O endereço de e-mail parece estranho ou imita um endereço legítimo? (Ex: `banco@notificacao.co` em vez de `@banco.com.br`)</p>
+                </div>
+                <div class="flowchart-step border-[#0A9396] bg-white">
+                    <h3 class="text-xl font-semibold text-[#005F73]">2. Analise o Tom</h3>
+                    <p class="text-gray-600">O e-mail cria um senso de urgência ou ameaça? (Ex: "Sua conta será bloqueada!")</p>
+                </div>
+                <div class="flowchart-step border-[#0A9396] bg-white">
+                    <h3 class="text-xl font-semibold text-[#005F73]">3. Procure por Erros</h3>
+                    <p class="text-gray-600">Existem erros de gramática ou digitação? Empresas sérias geralmente não cometem esses deslizes.</p>
+                </div>
+                <div class="flowchart-step border-[#EE9B00] bg-yellow-50">
+                    <h3 class="text-xl font-semibold text-[#CA6702]">4. Desconfie de Links e Anexos</h3>
+                    <p class="text-gray-600">Passe o mouse sobre os links (sem clicar!) para ver o endereço real. Nunca abra anexos inesperados.</p>
+                </div>
+                <div class="flowchart-step border-[#AE2012] bg-red-50">
+                    <h3 class="text-xl font-semibold text-[#9B2226]">5. Cuidado com Pedidos de Informação</h3>
+                    <p class="text-gray-600">Empresas legítimas NUNCA pedirão sua senha ou dados sensíveis por e-mail.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="protection" class="mb-16">
+            <h2 class="text-3xl font-bold text-center text-[#005F73] mb-8">Seu Escudo Protetor: Ações Essenciais</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                 <div class="space-y-4">
+                    <h3 class="text-2xl font-semibold text-[#005F73]">A Autenticação Multifator (MFA) é sua melhor defesa</h3>
+                    <p class="text-gray-700">Mesmo que um criminoso roube sua senha, a MFA impede o acesso à sua conta. Ela funciona como uma segunda camada de segurança, exigindo uma confirmação pelo seu celular. Ativá-la bloqueia a grande maioria das tentativas de invasão.</p>
+                     <p class="text-gray-700 font-semibold">Outras ações cruciais:</p>
+                    <ul class="list-none space-y-3">
+                        <li class="flex items-center"><span class="text-2xl mr-3">🤔</span><span><strong class="text-[#005F73]">Pense antes de clicar:</strong> A pressa é inimiga da segurança.</span></li>
+                        <li class="flex items-center"><span class="text-2xl mr-3">🔄</span><span><strong class="text-[#005F73]">Mantenha tudo atualizado:</strong> Windows 11 e Microsoft 365 precisam das últimas atualizações.</span></li>
+                        <li class="flex items-center"><span class="text-2xl mr-3">🚩</span><span><strong class="text-[#005F73]">Reporte suspeitas:</strong> Use o botão "Reportar Phishing" no Outlook para alertar a TI.</span></li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="chart-container">
+                        <canvas id="mfaEffectivenessChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="response">
+            <h2 class="text-3xl font-bold text-center text-[#005F73] mb-8">Protocolo de Emergência: Clicou em Algo Suspeito?</h2>
+            <div class="max-w-3xl mx-auto mt-8">
+                <div class="timeline-item" data-step="1">
+                    <h3 class="text-xl font-bold text-[#005F73]">Pare Imediatamente</h3>
+                    <p class="text-gray-700">Não interaja mais com o e-mail ou com qualquer site que ele tenha aberto. Não baixe mais nada.</p>
+                </div>
+                <div class="timeline-item" data-step="2">
+                    <h3 class="text-xl font-bold text-[#005F73]">Desconecte-se (se possível)</h3>
+                    <p class="text-gray-700">Se suspeitar de malware, desconectar o computador da rede pode impedir que o problema se espalhe.</p>
+                </div>
+                <div class="timeline-item" data-step="3">
+                    <h3 class="text-xl font-bold text-[#005F73]">Mude sua Senha</h3>
+                    <p class="text-gray-700">Usando um dispositivo seguro, mude a senha da conta afetada e de outras contas que usem a mesma senha.</p>
+                </div>
+                <div class="timeline-item" data-step="4">
+                    <h3 class="text-xl font-bold text-[#EE9B00]">Informe a TI AGORA</h3>
+                    <p class="text-gray-700">Este é o passo mais importante. Contate o suporte de TI imediatamente. Não tenha vergonha ou medo. A rapidez é crucial para minimizar os danos. Quanto mais rápido você avisar, mais rápido poderemos ajudar.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="text-center p-6 bg-[#005F73] text-white mt-12">
+        <p>&copy; 2025 Agência Developer. Segurança é responsabilidade de todos.</p>
+    </footer>
+
+    <script>
+        function wrapLabel(label, maxWidth) {
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > maxWidth) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+        
+        const threatsCtx = document.getElementById('threatsChart').getContext('2d');
+        new Chart(threatsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Phishing', 'Malware', 'Spear Phishing'],
+                datasets: [{
+                    label: 'Nível de Perigo',
+                    data: [50, 75, 95],
+                    backgroundColor: ['#0A9396', '#EE9B00', '#AE2012'],
+                    borderColor: ['#005F73', '#CA6702', '#9B2226'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 100,
+                         ticks: {
+                            color: '#005F73'
+                        },
+                        grid: {
+                            color: '#E0E0E0'
+                        }
+                    },
+                    y: {
+                         ticks: {
+                            color: '#005F73',
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+
+        const mfaCtx = document.getElementById('mfaEffectivenessChart').getContext('2d');
+        new Chart(mfaCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Ataques Bloqueados pela MFA', 'Ataques que Passariam sem MFA'],
+                datasets: [{
+                    data: [99.9, 0.1],
+                    backgroundColor: ['#0A9396', '#E9D8A6'],
+                    borderColor: ['#005F73', '#CA6702'],
+                    borderWidth: 2,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#005F73',
+                            padding: 20
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Efetividade da Autenticação Multifator (MFA)',
+                        color: '#005F73',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        },
+                        padding: {
+                            top: 10,
+                            bottom: 20
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
